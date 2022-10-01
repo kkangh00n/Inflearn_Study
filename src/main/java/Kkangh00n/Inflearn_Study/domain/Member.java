@@ -1,7 +1,17 @@
 package Kkangh00n.Inflearn_Study.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity             //JPA가 관리하는 엔티티
+
 //도메인 (회원)
 public class Member {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //db가 id를 알아서 생성해줌
     private Long id;
     private String name;
 

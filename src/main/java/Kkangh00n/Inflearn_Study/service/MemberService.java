@@ -5,6 +5,7 @@ import Kkangh00n.Inflearn_Study.repository.MemberRepository;
 import Kkangh00n.Inflearn_Study.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,8 @@ import java.util.Optional;
 
 //@Service            //스프링 빈에 등록 -> 자동으로 생성자 호출 (컴포넌트 스캔방식 -> 어노테이션 안에 @Component 등록되어있음)
 //서비스 (비즈니스 로직 구현)
+
+@Transactional
 public class MemberService {       //Test를 만들고싶으면?? ctrl + shift + t
     private final MemberRepository memberRepository;
 
@@ -23,13 +26,16 @@ public class MemberService {       //Test를 만들고싶으면?? ctrl + shift +
     //회원가입
     public Long join(Member member) {
 
-        validateDuplicateMember(member);
-        //ctrl + alt + m을 통해 로직(메소드)으로 뽑아냄
-        //리포지토리에 가입을 원하는 member의 이름이 있다면, "이미 존재합니다" 출력
-
-        memberRepository.save(member);
-        return member.getId();
-
+        long start = System.currentTimeMillis();
+        try {
+            validateDuplicateMember(member); //중복 회원 검증
+            memberRepository.save(member);
+            return member.getId();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join " + timeMs + "ms");
+        }
     }
 
     private void validateDuplicateMember(Member member) {
