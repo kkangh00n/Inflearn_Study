@@ -2,6 +2,7 @@ package Kkangh00n.Inflearn_Study;
 
 
 import Kkangh00n.Inflearn_Study.repository.JDBCMemberRepository;
+import Kkangh00n.Inflearn_Study.repository.JdbcTemplateMemberRepository;
 import Kkangh00n.Inflearn_Study.repository.MemberRepository;
 import Kkangh00n.Inflearn_Study.repository.MemoryMemberRepository;
 import Kkangh00n.Inflearn_Study.service.MemberService;
@@ -32,7 +33,9 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository() {
         //return new MemoryMemberRepository();
-        return new JDBCMemberRepository(dataSource);
+        //return new JDBCMemberRepository(dataSource);
+
+        return new JdbcTemplateMemberRepository(dataSource);
 
     }
 }

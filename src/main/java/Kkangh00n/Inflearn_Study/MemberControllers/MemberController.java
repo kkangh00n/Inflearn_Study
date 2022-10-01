@@ -31,7 +31,7 @@ public class MemberController {
     
     @GetMapping(value = "/members/new")         //members/new url로 이동하고 첫 화면
     public String createForm() {
-        // 빈칸에 이름을 적고 등록하면, MemberForm의 name에 이름이 등록 -> 34행
+        // 빈칸에 이름을 적고 등록하면, MemberForm의 name에 이름이 등록 -> 41행
         return "members/createMemberForm";
     }
 

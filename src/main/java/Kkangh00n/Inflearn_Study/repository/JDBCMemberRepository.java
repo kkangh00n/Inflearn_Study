@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+//순수 JDBC 방식
+
 public class JDBCMemberRepository implements MemberRepository {
 
     private final DataSource dataSource;
+    //db에 붙기위한 데이터소스
 
     public JDBCMemberRepository(DataSource dataSource) {
         this.dataSource = dataSource;
